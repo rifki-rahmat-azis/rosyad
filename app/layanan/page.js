@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import { Code, Monitor, Smartphone, PaintBucket, Shield, Database } from "lucide-react";
 
 export default function Layanan() {
@@ -47,23 +48,47 @@ export default function Layanan() {
         <div className="absolute w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-30 bottom-10 right-10"></div>
       </div>
 
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 relative z-10">
+      <motion.h2
+        className="text-4xl md:text-5xl font-extrabold text-center mb-12 relative z-10"
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: false }}
+      >
         Layanan IT
-      </h2>
-      <p className="text-lg text-center text-gray-200 max-w-2xl mx-auto mb-12 relative z-10">
+      </motion.h2>
+      <motion.p
+        className="text-lg text-center text-gray-200 max-w-2xl mx-auto mb-12 relative z-10"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+        viewport={{ once: false }}
+      >
         Kami menyediakan berbagai layanan IT profesional untuk mendukung kebutuhan bisnis dan teknologi Anda.
-      </p>
+      </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         {services.map((service, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-white/20 p-6 rounded-xl shadow-md text-center transition-transform duration-300 hover:scale-105"
+            className="bg-white/20 p-6 rounded-xl shadow-md text-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+            viewport={{ once: false }}
           >
-            <div className="flex justify-center mb-4">{service.icon}</div>
+            <motion.div
+              className="flex justify-center mb-4"
+              initial={{ rotateY: 180 }}
+              whileInView={{ rotateY: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+              viewport={{ once: false }}
+            >
+              {service.icon}
+            </motion.div>
             <h3 className="text-xl font-semibold">{service.title}</h3>
             <p className="text-gray-200 mt-2">{service.description}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

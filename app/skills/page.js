@@ -27,13 +27,26 @@ export default function Skills() {
         <div className="absolute w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-30 bottom-10 right-10"></div>
       </div>
 
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 relative z-10">
+      <motion.h2 
+        className="text-4xl md:text-5xl font-extrabold text-center mb-12 relative z-10"
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
         My Skills
-      </h2>
+      </motion.h2>
 
       <div className="max-w-4xl mx-auto relative z-10">
         {skills.map((skill, index) => (
-          <div key={index} className="mb-6">
+          <motion.div 
+            key={index} 
+            className="mb-6"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.5 }}
+          >
             <div className="flex justify-between">
               <span className="text-lg font-semibold">{skill.name}</span>
               <span className="text-lg font-semibold">{skill.level}%</span>
@@ -42,11 +55,12 @@ export default function Skills() {
               <motion.div
                 className={`h-full ${skill.color}`}
                 initial={{ width: 0 }}
-                animate={{ width: `${skill.level}%` }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                whileInView={{ width: `${skill.level}%` }}
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 1.5, ease: "easeOut", delay: index * 0.5 }}
               />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

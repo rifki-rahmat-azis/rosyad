@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Portofolio() {
   const projects = [
@@ -42,20 +43,35 @@ export default function Portofolio() {
       className="bg-gradient-to-r from-white to-yellow-400 text-black py-16 px-6 md:px-12 rounded-3xl shadow-lg mt-10"
     >
       <h2 className="text-4xl font-bold text-center mb-8">Portofolio</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: false }}
+      >
         {projects.map((project, index) => (
-          <div
+          <motion.div
             key={index}
-            className="bg-white/30 p-6 rounded-xl shadow-md text-center transition-transform duration-300 hover:scale-105"
+            className="bg-white/30 p-6 rounded-xl shadow-md text-center"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: index * 0.2 }}
+            viewport={{ once: false }}
           >
-            <div className="relative w-full h-48 rounded-lg overflow-hidden shadow-lg">
+            <motion.div 
+              className="relative w-full h-48 rounded-lg overflow-hidden shadow-lg"
+              initial={{ scale: 0.8 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+            >
               <Image src={project.image} alt={project.title} layout="fill" objectFit="cover" />
-            </div>
+            </motion.div>
             <h3 className="text-xl font-semibold mt-4">{project.title}</h3>
             <p className="text-gray-700 mt-2">{project.description}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
